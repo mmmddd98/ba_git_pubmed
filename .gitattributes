@@ -4,3 +4,4 @@ Biobert filter=lfs diff=lfs merge=lfs -text
 data filter=lfs diff=lfs merge=lfs -text
 DS_preparation filter=lfs diff=lfs merge=lfs -text
 README.md filter=lfs diff=lfs merge=lfs -text
+model.ckpt-1000000.data-00000-of-00001 filter=lfs diff=lfs merge=lfs -text
