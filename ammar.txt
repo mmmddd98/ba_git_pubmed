@@ -1,0 +1,58 @@
+requirements installation:
+	pip install -r requirements.txt #it will install tensorflow-gpu==1.14 ==> maybe delete this line in the file and install it after cuda installation.
+
+
+for 10cv ds prep
+1)splitting in 10 files:
+
+ 	cd DS_preparation/val_split
+	python3 val_split_art.py
+
+
+2)create 10 ds for cv (based on 10 files from 1)):
+	
+	#in same folder like 1)
+	python3 val_ds_create_art.py 10_cross_fold_val1
+
+3)move the folder with the 10 ds to Biobert/tensorflow/ds/cross_val
+
+
+4)start the 10cv:
+
+	cd Biobert/tensorflow/biobert_main
+	python3 run_val.py # enter the name of the ds-folder in main()-function (last line)
+
+
+5) the prediction is already done with 4), so we only need to evaluate it:
+	cd Biobert/tensorflow/results/cross_val
+	python3 val_create_results.py 10_cross_fold_val1 #name of the folder as parameter behind script
+==> results.tsv will be created inside the Outputfolder
+
+
+#######################################################################################################
+final finetuning with the whole ds
+I already put the full ds in the Folder: ba_git_pubmed/Biobert/tensorflow/ds/runs/final_tune in train.tsv
+so only start the script:
+	cd Biobert/tensorflow/biobert_main
+	python3 run_train_pred.py
+	
+
+#######################################################################################################
+final prediction on pubmed
+....
+
+
+
+
+
+
+ 
+	
+	
+
+	
+
+
+
+	
+	

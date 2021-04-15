@@ -42,7 +42,7 @@ def create_out_folder_in_results(headfolder,von,bis):
 
 
 def run():
-    os.system("python3 run_re.py --task_name=$TASK_NAME --do_train=true --do_eval=true --do_predict=true --vocab_file=$BIOBERT_DIR/vocab.txt --bert_config_file=$BIOBERT_DIR/bert_config.json --init_checkpoint=$BIOBERT_DIR/model.ckpt-1000000 --max_seq_length=128 --train_batch_size=32 --learning_rate=2e-5 --num_train_epochs=3.0 --do_lower_case=false --data_dir=$RE_DIR --output_dir=$OUTPUT_DIR")
+    os.system("python3 run_re.py --task_name=$TASK_NAME --do_train=true --do_eval=false --do_predict=false --vocab_file=$BIOBERT_DIR/vocab.txt --bert_config_file=$BIOBERT_DIR/bert_config.json --init_checkpoint=$BIOBERT_DIR/model.ckpt-1000000 --max_seq_length=128 --train_batch_size=32 --learning_rate=2e-5 --num_train_epochs=3.0 --do_lower_case=false --data_dir=$RE_DIR --output_dir=$OUTPUT_DIR")
     #print("wäre gerunnt")
 def eval():
     os.system("python3 ./biocodes/re_eval.py --output_path=$OUTPUT_DIR/test_results.tsv --answer_path=$RE_DIR/test.tsv")
@@ -59,7 +59,7 @@ def ein_run(input_folder,output_folder):
     stop = timeit.default_timer()
     file = open(str(output_dir) + "/run_laufzeit.tsv", "w")
     file.write(str(stop - start))
-    eval()
+    #eval()
 
 #print("############################################################################################################################################################################################################")
 
@@ -94,17 +94,12 @@ def get_name_train_and_test_file(input_files_list):
 def insert_dev(input_folder):
     shutil.copy("../ds/dev.tsv","../ds/" + str(input_folder) + "/dev.tsv")
 
-def main(ordner):
-    for i in range(1,2):
-        print(i)
-        ein_run("runs/" +str(ordner) + "/DS-" + str(i),"runs/" +str(ordner) + "/DS-" + str(i))
     
 
 
 
 ################################################################################
 #run
-
-main("Split_test")
+ein_run("runs/final_tune","runs/final_tune")
 
 
